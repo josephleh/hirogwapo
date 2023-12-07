@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<style>
+    #gameDiv{
+    flex: 1 1 30%;
+    border: 5px solid royalblue;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #121212;
+    text-align: center;
+    margin: 10px;
+}
+#player1Text{
+    color: #7CFC00;
+}
+#player2Text{
+    color: #7CFC00;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+
+}
+.choice {
+    line-height: 50px;
+    width: 110px;
+    font-size: 18px;
+    color: #7CFC00;
+    border: 3px solid #7CFC00;
+    background-color: #121212;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.choiceBtn {
+    line-height: 50px;
+    width: 110px;
+    font-size: 18px;
+    color: #7CFC00;
+    border: 3px solid #7CFC00;
+    background-color: #121212;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.choice:hover {
+    background-color: royalblue;
+    color: #121212;
+}
+.choiceBtn:hover {
+    background-color: royalblue;
+    color: #121212;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.title {
+    text-align: center;
+    color: #7CFC00;
+    margin-top: 20px;
+}
+.gameText {
+    color: #7CFC00;
+}
+
+.reset{
+    line-height: 50px;
+    width: 150px;
+    font-size: 18px;
+    color: #7CFC00;
+    border: 3px solid #7CFC00;
+    background-color: #121212;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.reset:hover {
+    background-color: royalblue;
+    color: #121212;
+}
+#resultText{
+    color: #7CFC00;
+}
+</style>
+
+
+<body>
+    <h1 class="title">Rock, Paper, & Scissors</h1>
+    <div class="container">
+    <div id="gameDiv">
+        <h1 class="gameText" id="player1Text">Player1: </h1>
+
+        <button class="choiceBtn">ROCK</button>
+        <button class="choiceBtn">PAPER</button>
+        <button class="choiceBtn">SCISSORS</button>
+    </div>
+
+    <div id="gameDiv">
+        <h1 class="gameText" id="player2Text">Player2: </h1>
+
+        <button class="choice">ROCK</button>
+        <button class="choice">PAPER</button>
+        <button class="choice">SCISSORS</button>
+    </div>
+
+    <div id="gameDiv">
+        <h1 class="gameText" id="resultText"></h1>
+
+    </div>
+    </div>
+    <button class="reset">Restart</button>
+
+    <script>
+const player1Text = document.querySelector("#player1Text");
+const player2Text = document.querySelector("#player2Text");
+const resultText = document.querySelector("#resultText");
+const choiceBtns = document.querySelectorAll(".choiceBtn");
+const choices = document.querySelectorAll(".choice");
+const resetButton = document.querySelector(".reset");
+
+let player1;
+let player2;
+let result;
+resultText.textContent = "Player 1's Turn to choose";
+choiceBtns.forEach(button => button.addEventListener("click", () => {
+    
+    player1 = button.textContent;
+    player1Text.textContent = `Player1: `;
+    resultText.textContent = "Player 2's Turn to choose";
+}));
+
+choices.forEach(button => button.addEventListener("click", () => {
+    player2 = button.textContent;
+    player2Text.textContent = `Player2: `;
+    resultText.textContent = checkWinner();
+}));
+
+resetButton.addEventListener("click", () => {
+    player1Text.textContent = "Player1: ";
+    player2Text.textContent = "Player2: ";
+    resultText.textContent = "Player 1's Turn to choose";
+    player1 = null;
+    player2 = null;
+});
+
+function checkWinner() {
+    if (player1 == null || player2 == null) {
+        return "Make a choice for both players.";
+    }
+
+    if (player1 == player2) {
+        return "Draw!";
+    } else if (player1 == "PAPER" && player2 == "ROCK") {
+        return "Player 1: Paper | Player 2: Rock | Player 1 Wins!🎉";
+    } else if (player1 == "PAPER" && player2 == "SCISSORS") {
+        return "Player 1: Paper | Player 2: Scissors | Player 2 Wins!🎉";
+    } else if (player1 == "ROCK" && player2 == "PAPER") {
+        return "Player 1: Rock | Player 2: Paper | Player 2 Wins!🎉";
+    } else if (player1 == "ROCK" && player2 == "SCISSORS") {
+        return "Player 1: Rock | Player 2: Scissors | Player 1 Wins!🎉";
+    } else if (player1 == "SCISSORS" && player2 == "PAPER") {
+        return "Player 1: Scissors | Player 2: Paper | Player 1 Wins!🎉";
+    } else if (player1 == "SCISSORS" && player2 == "ROCK") {
+        return "Player 1: Scissors | Player 2: Rock | Player 2 Wins!🎉";
+    }
+}
+    </script>
+</body>
+</html>
